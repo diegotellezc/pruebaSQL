@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server
+    restart: always
+    ports:
+      - 1433:1433
+    environment:
+      MSSQL_SA_PASSWORD: 123456789  # Cambia "tu_contraseña_de_sa" por la contraseña deseada para el usuario "sa".
+      ACCEPT_EULA: Y
+      MSSQL_PID: Express
+      MSSQL_TCP_PORT: 1433   # Puerto TCP de SQL Server
+      MSSQL_DB_NAME: sincosoftdb   # Cambia "sincosoftdb" por el nombre de la base de datos deseada
+    container_name: sql-server-db
+    volumes:
+      - ./sql-server-data:/var/opt/mssql   # Volumen para persistir los datos de SQL Server
+
+networks:
+  default:
+    driver: bridge
